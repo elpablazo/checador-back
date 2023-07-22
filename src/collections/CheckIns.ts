@@ -1,0 +1,134 @@
+import { CollectionConfig } from "payload/types";
+
+export const CheckIns: CollectionConfig = {
+  slug: "checkins",
+  admin: {
+    useAsTitle: "name",
+  },
+  labels: {
+    singular: "Check-in",
+    plural: "Check-ins",
+  },
+  fields: [
+    {
+      type: "text",
+      name: "name",
+      label: "Nombre",
+      access: {
+        create: () => false,
+        update: () => false,
+      },
+    },
+    {
+      type: "relationship",
+      name: "worker",
+      label: "Trabajador",
+      relationTo: "workers",
+      hasMany: false,
+      required: true,
+    },
+    {
+      type: "relationship",
+      name: "place",
+      label: "Obra",
+      relationTo: "places",
+      hasMany: false,
+      required: true,
+    },
+    {
+      type: "date",
+      name: "checkInDate",
+      label: "Fecha de check-in",
+      required: true,
+      admin: {
+        date: {
+          pickerAppearance: "dayAndTime",
+          timeIntervals: 30,
+        },
+      },
+    },
+    {
+      type: "group",
+      name: "location",
+      label: "Ubicación",
+      fields: [
+        {
+          type: "row",
+          fields: [
+            {
+              type: "row",
+              fields: [
+                {
+                  type: "text",
+                  name: "latitude",
+                  label: "Latitud",
+                  required: true,
+                },
+                {
+                  type: "text",
+                  name: "longitude",
+                  label: "Longitud",
+                  required: true,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // Sidebar position
+    // Todo: hook para que se active el checbox cuando se hace un check-in manual (por un usuario de la app)
+    {
+      type: "row",
+      fields: [
+        {
+          type: "checkbox",
+          name: "isManual",
+          label: "Manual",
+          access: {
+            create: () => false,
+            update: () => false,
+          },
+          admin: {
+            description:
+              "Para casos extraordinarios. Se registrará en el reporte semanal.",
+          },
+        },
+        {
+          type: "checkbox",
+          name: "isValid",
+          label: "Es válido",
+          admin: {
+            description:
+              "Si la ubicación del check-in fue dentro de la obra, y el reconocimiento facial es exitoso, se considera válido.",
+          },
+        },
+      ],
+      admin: {
+        position: "sidebar",
+      },
+    },
+    {
+      type: "select",
+      name: "type",
+      label: "Tipo",
+      required: true,
+      options: [
+        { label: "Entrada", value: "in" },
+        { label: "Salida", value: "out" },
+      ],
+      admin: {
+        position: "sidebar",
+      },
+    },
+    {
+      type: "textarea",
+      name: "notes",
+      label: "Notas",
+      admin: {
+        position: "sidebar",
+      },
+    },
+  ],
+};
