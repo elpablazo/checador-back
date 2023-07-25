@@ -12,6 +12,7 @@ import { CheckIns } from "./collections/CheckIns";
 // Plugins
 import cloudinaryPlugin from "payload-cloudinary-plugin/dist/plugins";
 import { Schedules } from "./collections/Schedules";
+import { Logs } from "./collections/Logs";
 
 export default buildConfig({
   serverURL: "http://localhost:3000",
@@ -19,7 +20,16 @@ export default buildConfig({
     user: Users.slug,
     avatar: "default",
   },
-  collections: [Users, Media, Workers, Positions, Places, Schedules, CheckIns],
+  collections: [
+    Users,
+    Media,
+    Workers,
+    Positions,
+    Places,
+    Schedules,
+    CheckIns,
+    Logs,
+  ],
   typescript: {
     outputFile: path.resolve(__dirname, "payload-types.ts"),
   },
