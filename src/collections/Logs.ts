@@ -12,6 +12,7 @@ export const Logs: CollectionConfig = {
     useAsTitle: "action",
   },
   fields: [
+    // Acción
     {
       type: "text",
       name: "action",
@@ -46,6 +47,31 @@ export const Logs: CollectionConfig = {
         date: {
           pickerAppearance: "dayAndTime",
         },
+      },
+    },
+    // Tipo
+    {
+      type: "select",
+      name: "type",
+      label: "Tipo",
+      required: true,
+      hasMany: false,
+      options: [
+        { label: "Creación", value: "create" },
+        { label: "Actualización", value: "update" },
+        { label: "Eliminación", value: "delete" },
+      ],
+      admin: {
+        position: "sidebar",
+      },
+    },
+    // Colección
+    {
+      type: "text",
+      name: "collection",
+      label: "Colección",
+      admin: {
+        position: "sidebar",
       },
     },
   ],
