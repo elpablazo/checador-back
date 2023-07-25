@@ -9,6 +9,9 @@ export const CheckIns: CollectionConfig = {
     singular: "Check-in",
     plural: "Check-ins",
   },
+  versions: {
+    maxPerDoc: 10,
+  },
   fields: [
     {
       type: "text",

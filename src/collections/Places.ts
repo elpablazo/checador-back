@@ -1,4 +1,6 @@
 import { CollectionConfig } from "payload/types";
+import _ from "lodash";
+import { logger } from "../lib/logger";
 
 export const Places: CollectionConfig = {
   slug: "places",
@@ -8,6 +10,9 @@ export const Places: CollectionConfig = {
   labels: {
     singular: "Obra",
     plural: "Obras",
+  },
+  versions: {
+    maxPerDoc: 10,
   },
   fields: [
     {
@@ -55,84 +60,68 @@ export const Places: CollectionConfig = {
   ],
   hooks: {
     // Logs
-    afterChange: [
-      async ({ operation, req: { payload, user }, previousDoc, doc }) => {
-        // Create log
-        if (operation === "create") {
-          await payload.create({
-            collection: "logs",
-            data: {
-              action: `${user.name} ${user.fatherLastName} creó la obra ${doc.name}`,
-              user: user.id,
-              date: new Date(),
-              type: "create",
-              coleccion: "places",
-              description: `Se creó la obra ${
-                doc.name
-              } con la siguiente información: \n\n${JSON.stringify(
-                doc,
-                null,
-                2
-              )}`,
-            },
-          });
-        } else if (operation === "update") {
-          // Obtenemos la lista de campos que cambiaron y filtramos los que siguen igual
-          // Ejemplo: ["name", "age"]
-          const changedFields = Object.keys(doc).filter(
-            (key) => doc[key] !== previousDoc[key]
-          );
-
-          // Creamos un array con los campos que cambiaron en formato "campo: valor anterior -> valor actual" sin tomar en cuenta los que siguen igual
-          // Ejemplo: ["name: Juan -> Pedro", "age: 20 -> 21"]
-          const changedFieldsWithPreviousAndNewValue = changedFields.map(
-            (key) => `${key}: ${previousDoc[key]} -> ${doc[key]}`
-          );
-
-          // Todo: extraer lógica a una función
-          // Todo: eliminar campos que no han cambiado
-          // Update log
-          await payload.create({
-            collection: "logs",
-            data: {
-              action: `${user.name} ${user.fatherLastName} actualizó la obra ${doc.name}`,
-              user: user.id,
-              date: new Date(),
-              type: "update",
-              coleccion: "places",
-              description: `Se actualizó la obra ${
-                doc.name
-              } con la siguiente información: \n\n${JSON.stringify(
-                changedFieldsWithPreviousAndNewValue,
-                null,
-                2
-              )}`,
-            },
-          });
-        }
-      },
-    ],
-    afterDelete: [
-      async ({ req: { payload, user }, doc }) => {
-        // Delete log
-        await payload.create({
-          collection: "logs",
-          data: {
-            action: `${user.name} ${user.fatherLastName} eliminó la obra ${doc.name}`,
-            user: user.id,
-            date: new Date(),
-            type: "delete",
-            coleccion: "places",
-            description: `Se eliminó la obra ${
-              doc.name
-            } con la siguiente información: \n\n${JSON.stringify(
-              doc,
-              null,
-              2
-            )}`,
-          },
-        });
-      },
-    ],
+    // afterChange: [
+    //   async ({ operation, req: { payload, user }, previousDoc, doc }) => {
+    //     // Create log
+    //     if (operation === "create") {
+    //       logger.create({ user, doc });
+    //     } else if (operation === "update") {
+    //       // Obtenemos la lista de campos que cambiaron y filtramos los que siguen igual
+    //       // Ejemplo: ["Name: Antes -> Después", "Description: Antes -> Después"]
+    //       const changedFields = Object.keys(doc).filter((key) => {
+    //         return (
+    //           !_.isEqual(doc[key], previousDoc[key]) && key !== "updatedAt"
+    //         );
+    //       });
+    //       // Todo: extraer lógica a una función
+    //       // Todo: eliminar campos que no han cambiado
+    //       // Update log
+    //       await payload.create({
+    //         collection: "logs",
+    //         data: {
+    //           action: `${user.name} ${user.fatherLastName} actualizó ${doc.name}`,
+    //           user: user.id,
+    //           date: new Date(),
+    //           type: "update",
+    //           coleccion: "places",
+    //           description: `Se actualizó la obra ${
+    //             doc.name
+    //           } en los siguientes campos: \n\n${changedFields
+    //             .map((field) => {
+    //               return `${field}: ${JSON.stringify(
+    //                 previousDoc[field],
+    //                 null,
+    //                 2
+    //               )} -> ${JSON.stringify(doc[field], null, 2)}`;
+    //             })
+    //             .join("\n")}
+    //                 `,
+    //         },
+    //       });
+    //     }
+    //   },
+    // ],
+    // afterDelete: [
+    //   async ({ req: { payload, user }, doc }) => {
+    //     // Delete log
+    //     await payload.create({
+    //       collection: "logs",
+    //       data: {
+    //         action: `${user.name} ${user.fatherLastName} eliminó la obra ${doc.name}`,
+    //         user: user.id,
+    //         date: new Date(),
+    //         type: "delete",
+    //         coleccion: "places",
+    //         description: `Se eliminó la obra ${
+    //           doc.name
+    //         } con la siguiente información: \n\n${JSON.stringify(
+    //           doc,
+    //           null,
+    //           2
+    //         )}`,
+    //       },
+    //     });
+    //   },
+    // ],
   },
 };

@@ -13,6 +13,9 @@ export const Workers: CollectionConfig = {
     singular: "Trabajador",
     plural: "Trabajadores",
   },
+  versions: {
+    maxPerDoc: 10,
+  },
   fields: [
     {
       type: "tabs",
