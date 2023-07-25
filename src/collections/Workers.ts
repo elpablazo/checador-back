@@ -71,136 +71,114 @@ export const Workers: CollectionConfig = {
             },
           ],
         },
-
         // Información de contacto
         {
           label: "Información de contacto",
           description: "Teléfono, dirección, etc.",
           fields: [
             {
-              type: "row",
+              type: "text",
+              name: "phoneNumber",
+              label: "Número de teléfono",
+              required: true,
+            },
+            {
+              type: "group",
+              name: "address",
+              label: "Dirección",
               fields: [
+                // Calle y número
                 {
-                  type: "text",
-                  name: "phoneNumber",
-                  label: "Número de teléfono",
-                  required: true,
-                },
-                {
-                  type: "group",
-                  name: "address",
-                  label: "Dirección",
+                  type: "row",
                   fields: [
-                    // Calle y número
                     {
-                      type: "row",
-                      fields: [
-                        {
-                          type: "text",
-                          name: "street",
-                          label: "Calle",
-                          required: true,
-                          admin: {
-                            width: "60%",
-                          },
-                        },
-                        {
-                          type: "text",
-                          name: "exteriorNumber",
-                          label: "Número exterior",
-                          required: true,
-                          admin: {
-                            width: "20%",
-                          },
-                        },
-                        {
-                          type: "text",
-                          name: "interiorNumber",
-                          label: "Número interior",
-                          admin: {
-                            width: "20%",
-                          },
-                        },
-                      ],
-                    },
-                    // Colonia y código postal
-                    {
-                      type: "row",
-                      fields: [
-                        {
-                          type: "text",
-                          name: "colony",
-                          label: "Colonia",
-                          required: true,
-                          admin: {
-                            width: "70%",
-                          },
-                        },
-                        {
-                          type: "text",
-                          name: "postalCode",
-                          label: "Código postal",
-                          required: true,
-                          admin: {
-                            width: "30%",
-                          },
-                        },
-                      ],
-                    },
-                    // Ciudad y estado
-                    {
-                      type: "row",
-                      fields: [
-                        {
-                          type: "text",
-                          name: "city",
-                          label: "Ciudad",
-                          required: true,
-                        },
-                        {
-                          type: "text",
-                          name: "state",
-                          label: "Estado",
-                          required: true,
-                        },
-                      ],
-                    },
-                    // Referencias
-                    {
-                      type: "textarea",
-                      name: "references",
-                      label: "Referencias",
+                      type: "text",
+                      name: "street",
+                      label: "Calle",
+                      required: true,
                       admin: {
-                        description:
-                          "Características particulares de la ubicación, como color de la puerta, etc.",
+                        width: "60%",
+                      },
+                    },
+                    {
+                      type: "text",
+                      name: "exteriorNumber",
+                      label: "Número exterior",
+                      required: true,
+                      admin: {
+                        width: "20%",
+                      },
+                    },
+                    {
+                      type: "text",
+                      name: "interiorNumber",
+                      label: "Número interior",
+                      admin: {
+                        width: "20%",
                       },
                     },
                   ],
+                },
+                // Colonia y código postal
+                {
+                  type: "row",
+                  fields: [
+                    {
+                      type: "text",
+                      name: "colony",
+                      label: "Colonia",
+                      required: true,
+                      admin: {
+                        width: "70%",
+                      },
+                    },
+                    {
+                      type: "text",
+                      name: "postalCode",
+                      label: "Código postal",
+                      required: true,
+                      admin: {
+                        width: "30%",
+                      },
+                    },
+                  ],
+                },
+                // Ciudad y estado
+                {
+                  type: "row",
+                  fields: [
+                    {
+                      type: "text",
+                      name: "city",
+                      label: "Ciudad",
+                      required: true,
+                    },
+                    {
+                      type: "text",
+                      name: "state",
+                      label: "Estado",
+                      required: true,
+                    },
+                  ],
+                },
+                // Referencias
+                {
+                  type: "textarea",
+                  name: "references",
+                  label: "Referencias",
+                  admin: {
+                    description:
+                      "Características particulares de la ubicación, como color de la puerta, etc.",
+                  },
                 },
               ],
             },
           ],
         },
-
-        // Base de datos
-        {
-          label: "Base de datos",
-          description:
-            "Las fotografías del trabajador. Se necesita un mínimo de 3. Entre más y más variadas, mejor.",
-          fields: [
-            {
-              type: "relationship",
-              name: "media",
-              label: "Fotografías",
-              required: true,
-              hasMany: true,
-              unique: true,
-              relationTo: "media",
-            },
-          ],
-        },
+        // Obra
         {
           label: "Obra",
+          description: "Obra en la que está actualmente el trabajador.",
           fields: [
             {
               type: "relationship",
@@ -208,48 +186,63 @@ export const Workers: CollectionConfig = {
               label: "Obra",
               relationTo: "places",
             },
-            // Array
+          ],
+        },
+        // Sueldo
+        {
+          label: "Sueldo",
+          description: "Sueldo base, bonos, horas extra, etc.",
+          fields: [
             {
-              type: "array",
-              name: "schedule",
-              label: "Horario",
-              minRows: 1,
+              type: "row",
               fields: [
                 {
-                  type: "select",
-                  name: "day",
-                  label: "Día",
-                  options: [
-                    { label: "Lunes", value: "monday" },
-                    { label: "Martes", value: "tuesday" },
-                    { label: "Miércoles", value: "wednesday" },
-                    { label: "Jueves", value: "thursday" },
-                    { label: "Viernes", value: "friday" },
-                    { label: "Sábado", value: "saturday" },
-                    { label: "Domingo", value: "sunday" },
-                  ],
+                  type: "number",
+                  name: "baseSalary",
+                  label: "Sueldo base",
+                  required: true,
                 },
                 {
-                  type: "date",
-                  name: "startTime",
-                  label: "Hora de entrada",
+                  type: "number",
+                  name: "extraHours",
+                  label: "Horas extra",
                   required: true,
                 },
               ],
-              admin: {
-                components: {
-                  RowLabel: ({ data }) => {
-                    if (data.day) {
-                      return `${data.day
-                        .charAt(0)
-                        .toUpperCase()}${data.day.slice(1)}
-                        `;
-                    } else {
-                      return "Día";
-                    }
-                  },
-                },
-              },
+            },
+          ],
+        },
+        // Horario
+        {
+          label: "Horario",
+          description: "Horario de entrada y salida.",
+          fields: [
+            {
+              type: "relationship",
+              name: "schedule",
+              label: "Horario",
+              relationTo: "schedules",
+              required: true,
+            },
+          ],
+        },
+        // Base de datos de reconocimiento facial
+        // Todo: Hacer la base obligatoria y un mínimo de 3 fotografías
+        // Todo: Añadir ejemplo de cómo se pueden ver las fotografías para la base de datos
+        // Todo: Generar un componente para mostrar las fotografías en la base de datos
+        // Todo: Añadir hook que cree el modelo de la base de datos
+        {
+          label: "Base de datos (RF)",
+          description:
+            "Las fotografías del trabajador. Se necesita un mínimo de 3. Entre más y más variadas, mejor.",
+          fields: [
+            {
+              type: "relationship",
+              name: "media",
+              label: "Fotografías",
+              hasMany: true,
+              unique: true,
+              relationTo: "media",
             },
           ],
         },
@@ -265,6 +258,8 @@ export const Workers: CollectionConfig = {
       label: "Activo",
       defaultValue: true,
       admin: {
+        description:
+          "Indica si el trabajador está activo o no. De no ser así, no será tomado en cuanta para los reportes.",
         position: "sidebar",
       },
     },
