@@ -68,7 +68,7 @@ export const Logs: CollectionConfig = {
     // Colección
     {
       type: "text",
-      name: "collection",
+      name: "coleccion",
       label: "Colección",
       admin: {
         position: "sidebar",
