@@ -43,7 +43,6 @@ const Users: CollectionConfig = {
       name: "profilePicture",
       label: "Foto de perfil",
       relationTo: "media",
-      required: true,
       unique: true,
       admin: {
         position: "sidebar",
