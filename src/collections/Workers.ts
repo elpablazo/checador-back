@@ -202,13 +202,13 @@ export const Workers: CollectionConfig = {
                 {
                   type: "number",
                   name: "baseSalary",
-                  label: "Sueldo base",
+                  label: "Sueldo base ($MXN/Hr)",
                   required: true,
                 },
                 {
                   type: "number",
                   name: "extraHours",
-                  label: "Horas extra",
+                  label: "Horas extra ($MXN/Hr)",
                   required: true,
                 },
               ],
