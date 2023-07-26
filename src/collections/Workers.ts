@@ -6,9 +6,6 @@ export const Workers: CollectionConfig = {
     useAsTitle: "email",
   },
   auth: true,
-  access: {
-    read: () => true,
-  },
   labels: {
     singular: "Trabajador",
     plural: "Trabajadores",

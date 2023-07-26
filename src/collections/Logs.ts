@@ -3,11 +3,6 @@ import { CollectionConfig } from "payload/types";
 // Estos logs permiten saber qué usuario hizo qué acción y cuándo para todas las colecciones
 export const Logs: CollectionConfig = {
   slug: "logs",
-  access: {
-    create: () => false,
-    update: () => false,
-    delete: () => false,
-  },
   admin: {
     useAsTitle: "action",
   },

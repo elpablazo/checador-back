@@ -9,9 +9,6 @@ export const Positions: CollectionConfig = {
     singular: "Puesto",
     plural: "Puestos",
   },
-  access: {
-    read: () => true,
-  },
   fields: [
     {
       type: "text",

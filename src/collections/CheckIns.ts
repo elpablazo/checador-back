@@ -17,10 +17,6 @@ export const CheckIns: CollectionConfig = {
       type: "text",
       name: "name",
       label: "Nombre",
-      access: {
-        create: () => false,
-        update: () => false,
-      },
     },
     {
       type: "relationship",
@@ -89,13 +85,9 @@ export const CheckIns: CollectionConfig = {
           type: "checkbox",
           name: "isManual",
           label: "Manual",
-          access: {
-            create: () => false,
-            update: () => false,
-          },
           admin: {
             description:
-              "Para casos extraordinarios. Se registrará en el reporte semanal.",
+              "Para casos extraordinarios. Se registrará como incidente.",
           },
         },
         {
