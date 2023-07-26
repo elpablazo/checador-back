@@ -21,6 +21,7 @@ export const Places: CollectionConfig = {
       admin: {
         description: "Imagen que ayuda a identificar la obra.",
       },
+      label: "Imagen",
     },
     {
       type: "text",
