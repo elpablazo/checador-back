@@ -69,5 +69,16 @@ export const Places: CollectionConfig = {
           "Determina el área de cobertura de la obra. Cualquier check-in fuera de este radio no será válido.",
       },
     },
+    // Sidebar panel
+    {
+      type: "relationship",
+      name: "client",
+      relationTo: "clients",
+      hasMany: false,
+      label: "Cliente",
+      admin: {
+        position: "sidebar",
+      },
+    },
   ],
 };
