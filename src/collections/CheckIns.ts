@@ -75,6 +75,16 @@ export const CheckIns: CollectionConfig = {
         },
       ],
     },
+    {
+      type: "upload",
+      relationTo: "media",
+      name: "image",
+      label: "Imagen de evidencia",
+      required: true,
+      admin: {
+        description: "Imagen que ayuda a identificar la obra.",
+      },
+    },
 
     // Sidebar position
     // Todo: hook para que se active el checbox cuando se hace un check-in manual (por un usuario de la app)
