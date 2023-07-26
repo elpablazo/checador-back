@@ -14,6 +14,15 @@ export const Places: CollectionConfig = {
   },
   fields: [
     {
+      type: "upload",
+      name: "image",
+      relationTo: "media",
+      // Todo: required: true,
+      admin: {
+        description: "Imagen que ayuda a identificar la obra.",
+      },
+    },
+    {
       type: "text",
       name: "name",
       label: "Nombre",
