@@ -14,6 +14,16 @@ export const Places: CollectionConfig = {
   },
   fields: [
     {
+      type: "upload",
+      name: "image",
+      relationTo: "media",
+      // Todo: required: true,
+      admin: {
+        description: "Imagen que ayuda a identificar la obra.",
+      },
+      label: "Imagen",
+    },
+    {
       type: "text",
       name: "name",
       label: "Nombre",
@@ -54,6 +64,10 @@ export const Places: CollectionConfig = {
       label: "Radio de cobertura (en mts.)",
       required: true,
       min: 0,
+      admin: {
+        description:
+          "Determina el área de cobertura de la obra. Cualquier check-in fuera de este radio no será válido.",
+      },
     },
   ],
 };
