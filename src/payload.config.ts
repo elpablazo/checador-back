@@ -12,6 +12,7 @@ import { CheckIns } from "./collections/CheckIns";
 // Plugins
 import cloudinaryPlugin from "payload-cloudinary-plugin/dist/plugins";
 import { Schedules } from "./collections/Schedules";
+import { Clients } from "./collections/Clients";
 // import { Logs } from "./collections/Logs";
 
 export default buildConfig({
@@ -28,6 +29,7 @@ export default buildConfig({
     Places,
     Schedules,
     CheckIns,
+    Clients,
     // Logs,
   ],
   typescript: {
