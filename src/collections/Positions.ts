@@ -18,16 +18,19 @@ export const Positions: CollectionConfig = {
       name: "name",
       label: "Nombre",
       required: true,
+      admin: {
+        description:
+          "Nombre del puesto. Puede ser compartido por varios trabajadores. No determina su rol o sueldo.",
+      },
     },
     {
-      type: "text",
+      type: "textarea",
       name: "description",
       label: "Descripción",
-    },
-    {
-      type: "text",
-      name: "salary",
-      label: "Salario base",
+      admin: {
+        description:
+          "Características que ayuden a identificar el puesto (opcional).",
+      },
     },
   ],
 };

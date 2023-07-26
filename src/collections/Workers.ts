@@ -194,7 +194,8 @@ export const Workers: CollectionConfig = {
         // Sueldo
         {
           label: "Sueldo",
-          description: "Sueldo base, bonos, horas extra, etc.",
+          description:
+            "Sueldo base y horas extra, en pesos mexicanos por hora.",
           fields: [
             {
               type: "row",
@@ -218,7 +219,7 @@ export const Workers: CollectionConfig = {
         // Horario
         {
           label: "Horario",
-          description: "Horario de entrada y salida.",
+          description: "Selecciona un horario existente o crea uno nuevo.",
           fields: [
             {
               type: "relationship",
