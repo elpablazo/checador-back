@@ -16,7 +16,7 @@ import { Clients } from "./collections/Clients";
 // import { Logs } from "./collections/Logs";
 
 export default buildConfig({
-  serverURL: "http://localhost:3000",
+  serverURL: process.env.PAYLOAD_URL,
   admin: {
     user: Users.slug,
     avatar: "default",
@@ -39,4 +39,7 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql"),
   },
+  // Todo: cambiar en producción
+  cors: ["http://localhost:5173"],
+  csrf: ["http://localhost:5173"],
 });
